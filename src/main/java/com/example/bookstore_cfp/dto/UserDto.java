@@ -1,40 +1,18 @@
-package com.example.bookstore_cfp.model;
-import com.example.bookstore_cfp.dto.UserDto;
+package com.example.bookstore_cfp.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Entity;
-
-@Entity
-public class UserM {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer UserId;
+public class UserDto {
     public String firstName;
     public String lastName;
     public String address;
     public String password;
     public String email;
 
-    public UserM(){
-
-    }
-
-    public UserM(UserDto userDto) {
-        this.firstName = userDto.firstName;
-        this.lastName = userDto.lastName;
-        this.address = userDto.address;
-        this.password = userDto.password;
-        this.email = userDto.email;
-    }
-
-    public Integer getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(Integer userId) {
-        UserId = userId;
+    public UserDto(String firstName, String lastName, String address, String password, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.password = password;
+        this.email = email;
     }
 
     public String getFirstName() {
