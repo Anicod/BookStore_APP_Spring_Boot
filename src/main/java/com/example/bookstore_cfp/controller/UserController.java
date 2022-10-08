@@ -4,23 +4,23 @@ import com.example.bookstore_cfp.dto.ResponseUserDto;
 import com.example.bookstore_cfp.dto.UserDto;
 import com.example.bookstore_cfp.model.UserM;
 import com.example.bookstore_cfp.service.IUserServe;
-import com.example.bookstore_cfp.service.UserServe;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @Slf4j
-public class BookStoreController {
+public class UserController {
     @Autowired
     IUserServe iUserServe;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseUserDto> userRegistration(@RequestBody UserDto userDto){
+    public ResponseEntity<ResponseUserDto> userRegistration(@Valid @RequestBody UserDto userDto){
         UserM userM = iUserServe.save(userDto);
         ResponseUserDto responseUserDto = new ResponseUserDto(userM, "user register successfully");
         return new ResponseEntity<>(responseUserDto, HttpStatus.OK);

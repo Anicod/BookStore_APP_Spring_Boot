@@ -1,8 +1,9 @@
 package com.example.bookstore_cfp.service;
 
 import com.example.bookstore_cfp.dto.UserDto;
+import com.example.bookstore_cfp.exception.BookStoreException;
 import com.example.bookstore_cfp.model.UserM;
-import com.example.bookstore_cfp.repository.BookStoreRepo;
+import com.example.bookstore_cfp.repository.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class UserServe implements IUserServe{
     @Autowired
-    BookStoreRepo bookStoreRepo;
+    UserRepo bookStoreRepo;
 
     @Override
     public UserM save(UserDto userDto) {
@@ -29,13 +30,13 @@ public class UserServe implements IUserServe{
 
     @Override
     public UserM getById(Integer Id) {
-        UserM userM = bookStoreRepo.findById(Id).get();
+        UserM userM = bookStoreRepo.findById(Id).orElseThrow(()->new BookStoreException("user not found"));
         return userM;
     }
 
     @Override
     public UserM update(Integer Id, UserM userM) {
-        UserM userM1 =  bookStoreRepo.findById(Id).get();
+        UserM userM1 =  bookStoreRepo.findById(Id).orElseThrow(()->new BookStoreException("User does not exsit"));
         if(userM1 != null){
             userM1.setFirstName(userM1.getFirstName());
             userM1.setLastName(userM.getLastName());
@@ -44,7 +45,7 @@ public class UserServe implements IUserServe{
             userM1.setEmail(userM.getEmail());
             return bookStoreRepo.save(userM1);
         }
-        return null;
+        return userM1;
     }
 
     @Override
@@ -54,6 +55,7 @@ public class UserServe implements IUserServe{
         }
         else {
             log.info("opps!! Id not found");
+            throw new BookStoreException("user not found");
         }
     }
 }
