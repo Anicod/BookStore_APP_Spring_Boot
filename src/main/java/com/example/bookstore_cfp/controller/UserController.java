@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<ResponseUserDto> getById(@RequestParam Integer id){
         UserM userM = iUserServe.getById(id);
         if(userM.UserId.equals(id)){
-            log.info("user exsit");
+            log.info("user exsit in database");
         }
         else {
             log.info("user not found");
