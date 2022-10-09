@@ -68,6 +68,12 @@ public class UserController {
         ResponseUserDto responseUserDto = new ResponseUserDto(userM, "user found");
         return new ResponseEntity<>(responseUserDto, HttpStatus.OK);
     }
+    @GetMapping("/login")
+    ResponseEntity<ResponseUserDto> login(@RequestParam String email, String password){
+       UserM userM =  iUserServe.byLogin(email, password);
+        ResponseUserDto responseUserDto  = new ResponseUserDto("welcome"+" "+userM.firstName+" "+userM.lastName, "login successgully");
+        return new ResponseEntity<>(responseUserDto, HttpStatus.OK);
+    }
 
 
 }

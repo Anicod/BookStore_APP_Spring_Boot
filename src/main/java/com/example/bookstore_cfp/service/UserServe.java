@@ -63,4 +63,10 @@ public class UserServe implements IUserServe{
     public UserM byName(String name) {
         return bookStoreRepo.getUserMSByFirstName(name);
     }
+
+    @Override
+    public UserM byLogin(String email, String password) {
+        return bookStoreRepo.getUserMBynameAndPassword(email, password);
+
+    }
 }
