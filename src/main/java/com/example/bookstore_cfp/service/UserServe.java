@@ -58,4 +58,9 @@ public class UserServe implements IUserServe{
             throw new BookStoreException("user not found");
         }
     }
+
+    @Override
+    public UserM byName(String name) {
+        return bookStoreRepo.getUserMSByFirstName(name);
+    }
 }

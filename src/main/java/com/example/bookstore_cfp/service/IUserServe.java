@@ -11,4 +11,5 @@ List<UserM> userList();
 UserM getById(Integer Id);
 UserM update(Integer Id, UserM userM);
 void delete(Integer Id);
+UserM byName(String name);
 }

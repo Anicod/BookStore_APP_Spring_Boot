@@ -62,4 +62,12 @@ public class UserController {
         return "Id deleted successfully";
     }
 
+    @GetMapping("byname/{name}")
+    ResponseEntity<ResponseUserDto> getByFirst(@PathVariable String name){
+        UserM userM = iUserServe.byName(name);
+        ResponseUserDto responseUserDto = new ResponseUserDto(userM, "user found");
+        return new ResponseEntity<>(responseUserDto, HttpStatus.OK);
+    }
+
+
 }
