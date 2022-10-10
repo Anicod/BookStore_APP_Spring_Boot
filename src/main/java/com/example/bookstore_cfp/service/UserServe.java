@@ -14,44 +14,44 @@ import java.util.List;
 @Slf4j
 public class UserServe implements IUserServe{
     @Autowired
-    UserRepo bookStoreRepo;
+    UserRepo userRepo;
 
     @Override
     public UserM save(UserDto userDto) {
         UserM userM = new UserM(userDto);
-        bookStoreRepo.save(userM);
+        userRepo.save(userM);
         return userM;
     }
 
     @Override
     public List<UserM> userList() {
-        return bookStoreRepo.findAll();
+        return userRepo.findAll();
     }
 
     @Override
     public UserM getById(Integer Id) {
-        UserM userM = bookStoreRepo.findById(Id).orElseThrow(()->new BookStoreException("user not found"));
+        UserM userM = userRepo.findById(Id).orElseThrow(()->new BookStoreException("user not found"));
         return userM;
     }
 
     @Override
     public UserM update(Integer Id, UserM userM) {
-        UserM userM1 =  bookStoreRepo.findById(Id).orElseThrow(()->new BookStoreException("User does not exsit"));
+        UserM userM1 =  userRepo.findById(Id).orElseThrow(()->new BookStoreException("User does not exsit"));
         if(userM1 != null){
             userM1.setFirstName(userM1.getFirstName());
             userM1.setLastName(userM.getLastName());
             userM1.setAddress(userM.getAddress());
             userM1.setPassword(userM.getPassword());
             userM1.setEmail(userM.getEmail());
-            return bookStoreRepo.save(userM1);
+            return userRepo.save(userM1);
         }
         return userM1;
     }
 
     @Override
     public void delete(Integer Id) {
-        if (bookStoreRepo.existsById(Id)){
-            bookStoreRepo.deleteById(Id);
+        if (userRepo.existsById(Id)){
+            userRepo.deleteById(Id);
         }
         else {
             log.info("opps!! Id not found");
@@ -61,12 +61,12 @@ public class UserServe implements IUserServe{
 
     @Override
     public UserM byName(String name) {
-        return bookStoreRepo.getUserMSByFirstName(name);
+        return userRepo.getUserMSByFirstName(name);
     }
 
     @Override
     public UserM byLogin(String email, String password) {
-        return bookStoreRepo.getUserMBynameAndPassword(email, password);
+        return userRepo.getUserMBynameAndPassword(email, password);
 
     }
 }
