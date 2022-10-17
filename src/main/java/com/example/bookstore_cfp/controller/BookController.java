@@ -50,10 +50,16 @@ public class BookController {
         BookResponseDto bookResponseDto = new BookResponseDto(updateBook, "book data updated successfully");
         return new ResponseEntity<>(bookResponseDto, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{Id}")
+    @DeleteMapping("/deleted/{Id}")
     String deleteBook(@PathVariable Integer Id){
         iBookServe.delete(Id);
         return "book deleted successfully";
+    }
+    @GetMapping("/sortprice")
+    ResponseEntity<BookResponseDto> sortPrice(){
+        List<BookM> bookMList = iBookServe.bookSort();
+        BookResponseDto bookResponseDto = new BookResponseDto(bookMList, "book list with sorted price");
+        return new ResponseEntity<>(bookResponseDto, HttpStatus.OK);
     }
 
 

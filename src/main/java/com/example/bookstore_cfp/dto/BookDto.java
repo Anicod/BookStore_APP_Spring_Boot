@@ -6,6 +6,7 @@ public class BookDto {
     public String bookDescription;
     public String bookImage;
     public Long bookPrice;
+    public Long bookQuant;
 
     public String getBookName() {
         return bookName;
@@ -43,15 +44,24 @@ public class BookDto {
         return bookPrice;
     }
 
+    public Long getBookQuant() {
+        return bookQuant;
+    }
+
+    public void setBookQuant(Long bookQuant) {
+        this.bookQuant = bookQuant;
+    }
+
     public void setBookPrice(Long bookPrice) {
         this.bookPrice = bookPrice;
     }
 
-    public BookDto(String bookName, String bookAuthor, String bookDescription, String bookImage, Long bookPrice) {
+    public BookDto(String bookName, String bookAuthor, String bookDescription, String bookImage, Long bookPrice, Long bookQuant) {
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
         this.bookDescription = bookDescription;
         this.bookImage = bookImage;
         this.bookPrice = bookPrice;
+        this.bookQuant = bookQuant;
     }
 }

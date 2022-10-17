@@ -1,6 +1,7 @@
 package com.example.bookstore_cfp.service;
 
 import com.example.bookstore_cfp.dto.BookDto;
+import com.example.bookstore_cfp.exception.BookStoreException;
 import com.example.bookstore_cfp.model.BookM;
 import com.example.bookstore_cfp.model.UserM;
 import com.example.bookstore_cfp.repository.BookRepo;
@@ -29,22 +30,23 @@ public class BookServe implements IBookServe {
 
   @Override
   public BookM getBookById(Integer Id) {
-    BookM bookM = bookRepo.findById(Id).orElse(null);
+    BookM bookM = bookRepo.findById(Id).orElseThrow(()-> new BookStoreException("data not exsist please check and try again"));
     return bookM;
   }
 
   @Override
   public BookM update(Integer Id, BookM bookM) {
-    BookM bookM1 = bookRepo.findById(Id).orElse(null);
+    BookM bookM1 = bookRepo.findById(Id).orElseThrow(()->new BookStoreException("sorry data not exsist try again"));
     if(bookM1 != null){
       bookM1.setBookName(bookM.getBookName());
       bookM1.setBookAuthor(bookM.getBookAuthor());
       bookM1.setBookDescription(bookM.getBookDescription());
       bookM1.setBookImage(bookM.getBookImage());
       bookM1.setBookPrice(bookM.getBookPrice());
+      bookM1.setBookPrice(bookM.getBookQuant());
       return bookRepo.save(bookM1);
     }
-    return null;
+    return bookM1;
   }
 
   @Override
@@ -55,8 +57,14 @@ public class BookServe implements IBookServe {
       }
       else {
         log.info("book data does not exsit");
+        throw new BookStoreException("that data is not available!!!");
       }
 
+  }
+
+  @Override
+  public List<BookM> bookSort() {
+    return bookRepo.sortedPrice();
   }
 
 }

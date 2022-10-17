@@ -11,4 +11,5 @@ public interface IBookServe {
     BookM getBookById(Integer Id);
     BookM update(Integer Id, BookM bookM);
     void delete(Integer Id);
+    List<BookM> bookSort();
 }

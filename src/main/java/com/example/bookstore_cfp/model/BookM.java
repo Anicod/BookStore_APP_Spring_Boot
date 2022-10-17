@@ -5,6 +5,7 @@ import com.example.bookstore_cfp.dto.BookDto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.swing.*;
 
 @Entity
 public class BookM {
@@ -16,7 +17,7 @@ public class BookM {
     public String bookDescription;
     public String bookImage;
     public Long bookPrice;
-
+    public Long bookQuant;
     public Integer getBookId() {
         return bookId;
     }
@@ -64,6 +65,15 @@ public class BookM {
     public void setBookPrice(Long bookPrice) {
         this.bookPrice = bookPrice;
     }
+
+    public Long getBookQuant() {
+        return bookQuant;
+    }
+
+    public void setBookQuant(Long bookQuant) {
+        this.bookQuant = bookQuant;
+    }
+
     public BookM(){
 
     }
@@ -73,6 +83,7 @@ public class BookM {
         this.bookDescription = bookDto.bookDescription;
         this.bookImage = bookDto.bookImage;
         this.bookPrice = bookDto.bookPrice;
+        this.bookQuant = bookDto.bookQuant;
 
     }
 
